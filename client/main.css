@@ -1,0 +1,17 @@
+html {
+	background: white;
+	height: 100vh;
+}
+
+body {
+	height: 100vh;
+	font: 14px "Century Gothic", Futura, sans-serif;
+}
+
+.aboutTitle {
+}
+
+.sideBar {
+	border: 1px solid grey;
+	background: white;
+}
