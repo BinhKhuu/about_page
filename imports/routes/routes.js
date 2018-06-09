@@ -28,7 +28,7 @@ export const renderRoutes = () => (
 					<Route render={() => <p>404</p>}/>
 				</Switch>
 				{/*side bar component*/}
-				<Sidebar linkClicked={this.linkClicked} />
+				<Sidebar />
 			</div>
 		</div>
 	</Router>
