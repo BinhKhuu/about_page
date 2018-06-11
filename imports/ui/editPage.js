@@ -72,7 +72,7 @@ class ContentInner extends React.Component {
 		//with page data set submit button to disabled
 		const useValue = value != null ? value : page.value;
 		return(
-			<div className='offset-md-1 col-md-8 aboutTitle'>
+			<div className='col-md-8 aboutTitle'>
 				<Link to={`/${page._id}/edit`}>Edit</Link>
 				<div>
 					<h1>{page.title}</h1>
