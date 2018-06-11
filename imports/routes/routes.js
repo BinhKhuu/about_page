@@ -5,9 +5,10 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 import { Header } from '../ui/header.js';
-import { Sidebar } from '../ui/sidebar.js';
 import { Content } from '../ui/content.js';
 import { EditPage } from '../ui/editPage.js';
+
+import Sidebar from '../ui/sidebar.js';
 
 //react router imports
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -20,6 +21,8 @@ export const renderRoutes = () => (
 			{/*header component*/}
 			<Header />
 			<div className='row'>
+				{/*margin gutter from left side*/}
+				<div className='gutter col-md-1'></div>
 				{/*componet for the middle page*/}
 				<Switch>
 					<Route path="/new" component={Content}/>
@@ -29,6 +32,8 @@ export const renderRoutes = () => (
 				</Switch>
 				{/*side bar component*/}
 				<Sidebar />
+			{/*margin gutter from rightside*/}
+				<div className='gutter col-md-1'></div>
 			</div>
 		</div>
 	</Router>

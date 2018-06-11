@@ -1,6 +1,11 @@
 html {
 	background: white;
 	height: 100vh;
+
+	--main-p1: #344955;
+	--main-p2: #232f34;
+	--main-s1: #F9AA33;
+	--main-s2: #BDBDBD;
 }
 
 body {
@@ -9,9 +14,21 @@ body {
 }
 
 .aboutTitle {
+	border-bottom: 2px solid var(--main-s1);
 }
 
 .sideBar {
-	border: 1px solid grey;
-	background: white;
+	border-left: 2px solid var(--main-s1);
+	border-right: 2px solid var(--main-s1);
+	border-bottom: 2px solid var(--main-s1);
+}
+
+.header {
+	color: white;
+	background: var(--main-p1);
+}
+
+.gutter {
+	border-right: 2px solid var(--main-s1);
+	border-bottom: 2px solid var(--main-s1);
 }

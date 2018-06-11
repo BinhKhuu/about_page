@@ -1,10 +1,99 @@
-import { Meteor } from 'meteor/meteor';
+//react imports
 import React from 'react';
 import PropTypes from 'prop-types';
+//meteor imports
+import { Meteor } from 'meteor/meteor';
+//react router imports
 import { Link } from 'react-router-dom';
+//material ui imports
+import { withStyles } from '@material-ui/core/styles';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
 
-export class Sidebar extends React.Component {
+import blue from '@material-ui/core/colors/blue';
 
+//styles for classes prop
+const styles = theme => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    palette: {
+    	primary: blue,
+    },
+    background: theme.palette.background.paper,
+    border: 'solid 1px ' + theme.palette.background.paper,
+  },
+  nested: {
+    paddingLeft: theme.spacing.unit * 5,
+  },
+});
+
+// Collapsable list items in a category
+class CategoryItems extends React.Component {
+
+	/*
+	 * state@open, toggler for each category
+	 */
+	constructor(props) {
+		super(props)
+		this.state = {
+			open: true,
+		}
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick(){
+		this.setState({ open: !this.state.open });
+	}
+
+	render() {
+		return(
+			<div>
+				<ListItem button onClick={this.handleClick}>
+					{this.props.category}
+				</ListItem>
+				{/* Each Category is a collapsable button */}
+				<Collapse 
+					in={this.state.open} 
+					timeout="auto" 
+					unmountOnExit
+					>
+					{/* Each Item in the list of Categories Links to its own page  */}
+          <List component="div" disablePadding>
+						{
+							this.props.pages.map((page, i) =>
+								<ListItem 
+									key={i} 
+									className={this.props.classes.nested}
+									button
+								>
+									<Link to={`/${page._id}`}>{page.title}</Link>
+								</ListItem>
+							)
+						}
+        	</List>
+        </Collapse>
+			
+			</div>
+		);
+	}
+}
+
+class Sidebar extends React.Component {
+
+	/*
+   * state@pages, page object: { title:string, category:string, createdAt:date, value: string }
+	 */
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -35,21 +124,21 @@ export class Sidebar extends React.Component {
 		return [...grouped.entries()];
 	}
 
-
-
 	renderCategory = ([category, pages]) => {
-		return (
-			<div key={category}>
-				{category}
-				<ul>
-				{
-					pages.map((page, i) =>
-						<li key={i}>
-							<Link to={`/${page._id}`}>{page.title}</Link>
-						</li>
-					)
-				}
-				</ul>
+		const { classes } = this.props;
+		return (	
+			<div key={category}>	
+				<List 			
+					className={classes.root}
+					component="nav"
+					subheader={<ListSubheader component="div"></ListSubheader>}
+				>
+					<CategoryItems 
+						category={category}
+						pages={pages}
+						classes={classes}
+					/>
+				</List>
 			</div>
 		);
 	}
@@ -65,28 +154,8 @@ export class Sidebar extends React.Component {
 	}
 }
 
-/* Legecy stuff deleted later
-class ListTitle extends React.Component {
-	render() {
-		return (
-			<div>
-				<h3>{this.props.category}</h3>
-				<ListItem 
-					title={this.props.title}
-				/>
-			</div>
-		);
-	}
-}
+Sidebar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
-class ListItem extends React.Component {
-	render() {
-		return(
-			<ul>
-				<li>{this.props.title}</li>
-			</ul>		
-		);
-	}
-}
-
-*/
+export default withStyles(styles)(Sidebar);

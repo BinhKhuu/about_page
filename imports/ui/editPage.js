@@ -7,9 +7,9 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Pages } from '../api/pages';
 import {RawText, Markup } from './TextDisplays.js';
 
+import Button from '@material-ui/core/Button';
+
 //MarkdownIt library can change to other but you need to replace the converter call
-
-
 class ContentInner extends React.Component {
 	/* @state.value, value for Markup Component*/
   constructor(props) {
@@ -79,12 +79,12 @@ class ContentInner extends React.Component {
 					<h4><u>Editor</u></h4>
 					<RawText handleKeyPress={this.handleKeyPress} value={useValue}/>
 
-					<button
+					<Button
 						disabled={value == null}
 						onClick={this.handleSubmit}
 						>
 						Submit
-					</button>
+					</Button>
 					<br />
 					<h4><u>Preview</u></h4>
 					<Markup value={useValue}/>

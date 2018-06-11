@@ -32,13 +32,16 @@ class ContentInner extends React.Component {
 	render() {
 		const { page, loading } = this.props;
 		return(
-			<div className='offset-md-1 col-md-8 aboutTitle'>
-				<Link to={`/${page._id}/edit`}>Edit</Link>
-				<div>
-					<h1>{page.title}</h1>
-					<Markup value={page.value}/>
+				<div className='col-md-8 aboutTitle'>
+					<div>
+						{/*tile and edit on the same line*/}
+						<div className='row'>
+							<h1 className='col-md-10'>{page.title}</h1>
+							<Link to={`/${page._id}/edit`}>Edit</Link>			
+						</div>
+						<Markup value={page.value}/>
+					</div>
 				</div>
-			</div>
 		);
 	}
 }

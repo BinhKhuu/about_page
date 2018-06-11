@@ -1,23 +1,25 @@
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
 var MarkdownIt = require('markdown-it');
 
 export class RawText extends React.Component {
   render() {
     return (
-      <textarea 
+      <TextField multiline
       	onChange={this.props.handleKeyPress} 
       	id='markdown-box' 
-      	rows='22'
+      	rows='30'
         col='100' 
       	type='text' 
       	className='form-control' 
       	value={this.props.value} >
-    	</textarea>
+    	</TextField>
       );
   }
 }
 
 /*Markup text*/
+/* to do set limit on characters per new line*/
 export class Markup extends React.Component {
   createMarkup() {
     var md = new MarkdownIt()
