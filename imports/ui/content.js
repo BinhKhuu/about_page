@@ -10,6 +10,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Pages } from '../api/pages';
 //component imports
 import {RawText, Markup } from './TextDisplays.js';
+import { LoginDialog } from './LoginDialog.js';
 
 class ContentInner extends React.Component {
   constructor(props) {
@@ -37,6 +38,8 @@ class ContentInner extends React.Component {
 						{/*tile and edit on the same line*/}
 						<div className='row'>
 							<h1 className='col-md-10'>{page.title}</h1>
+							{/*!!!!!!!!!!!!!! testing dialog remove later !!!!!!!!!!!!!!!!!!!*/}
+							<LoginDialog />
 							<Link to={`/${page._id}/edit`}>Edit</Link>			
 						</div>
 						<Markup value={page.value}/>
