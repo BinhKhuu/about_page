@@ -1,5 +1,6 @@
 // react component imports
 import React from 'react';
+import { withTracker } from 'meteor/react-meteor-data';
 
 // component imports
 import { Meteor } from 'meteor/meteor';
@@ -12,6 +13,7 @@ import Sidebar from '../ui/sidebar.js';
 
 //react router imports
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 
 //all routes will have a template with header and sidebar
 export const renderRoutes = () => (
@@ -32,9 +34,21 @@ export const renderRoutes = () => (
 				</Switch>
 				{/*side bar component*/}
 				<Sidebar />
-			{/*margin gutter from rightside*/}
+				{/*margin gutter from rightside*/}
 				<div className='gutter col-md-1'></div>
 			</div>
 		</div>
 	</Router>
-)
+);
+
+/*
+	Meteor data wrapper.
+*/
+
+export const renderApp = withTracker((props) => {
+
+	return {
+		currentUser: Meteor.user(),
+	};
+
+})(renderRoutes);

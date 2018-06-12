@@ -5,6 +5,8 @@ import { renderRoutes } from '../imports/routes/routes.js'
 
 if(Meteor.isClient) {
 	Meteor.startup(function(){
-		render(renderRoutes(), document.getElementById("app"))
-	})
+		render(renderRoutes(), document.getElementById("app"));
+
+		window.addEventListener('unload', () => Meteor.logout())
+	});
 }

@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
-
+import { Accounts } from 'meteor/accounts-base'
 import { Pages } from '../imports/api/pages';
+
+import '../imports/startup/accounts-config.js';
 
 Meteor.startup(() => {
 
@@ -24,6 +26,14 @@ Meteor.startup(() => {
 
 		INITIAL_PAGES.forEach(page => Pages.insert(page));
 	}
+
+	if (Meteor.users.find().count() === 0) {
+		Accounts.createUser({
+			'username' : 'root',
+			'password' : 'root',
+		});
+	}
+
 
 });
 
