@@ -5,7 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 // component imports
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
-import { Header } from '../ui/header.js';
+import Header from '../ui/header.js';
 import { Content } from '../ui/content.js';
 import { EditPage } from '../ui/editPage.js';
 

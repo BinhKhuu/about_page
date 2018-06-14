@@ -50,6 +50,10 @@ Meteor.publish('page', function (id) {
 
 Meteor.methods({
 
+	'user.logout'() {
+		Meteor.logout();
+	},
+	
 	'pages.get'(id) {
 
 		return Pages.findOne(id);
