@@ -1,18 +1,21 @@
+//Meteor imports
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 
+//component imports
 import { Pages } from '../api/pages';
 import {RawText, Markup } from './TextDisplays.js';
-
-import Button from '@material-ui/core/Button';
-import { withRouter } from 'react-router';
-
 import { LoginDialog } from './LoginDialog.js';
 
+//router imports
+import { withRouter } from 'react-router';
 import  { Redirect } from 'react-router-dom';
+
+//material-ui imports 
+import Button from '@material-ui/core/Button';
+
 
 //MarkdownIt library can change to other but you need to replace the converter call
 class ContentInner extends React.Component {
@@ -86,22 +89,19 @@ class ContentInner extends React.Component {
 		const { page, loading, user } = this.props;
 		const { value } = this.state;
 
+		//loading state
 		if (loading) {
 			return this.renderLoading();
 		}
-
+		//404 error state
 		if (!page) {
-			//return this.renderNotFound();
 		}
-
+		//prevent non admins from accessing /:pageId/edit 
 		if (!user) {
-			//this.props.history.push(`/${this.props.page._id}`);
-			//return this.renderBack();
 			return <Redirect to={`/${this.props.page._id}`} />
 		}
-
 		//if value is not null there is page data
-		//with page data set submit button to disabled
+		//submit disabled until new data is added to page data
 		const useValue = value != null ? value : page.value;
 		const isLoggedIn = this.props.user;
 
@@ -144,25 +144,3 @@ export const EditPage = withTracker(({ match }) => {
 
 })(ContentInner);
 
-/*
-	to wrap edit page withTracker with Withrouter
-	export const EditPage = withRouter(innerEditpage);
-	rename EditPage to innerEditPage defined above
-
-
-					<div>
-					<h1>{page.title}</h1>
-					<h4><u>Editor</u></h4>
-					<RawText handleKeyPress={this.handleKeyPress} value={useValue}/>
-					<Button
-						disabled={value == null}
-						onClick={this.handleSubmit}
-						>
-						Submit
-					</Button>
-					<br />
-					<h4><u>Preview</u></h4>
-					<Markup value={useValue}/>
-				</div>
-
-*/

@@ -19,7 +19,6 @@ import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
-
 import blue from '@material-ui/core/colors/blue';
 
 //styles for classes prop
@@ -158,4 +157,5 @@ Sidebar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+//adds class prop into sidebar
 export default withStyles(styles)(Sidebar);

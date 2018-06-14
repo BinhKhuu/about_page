@@ -1,6 +1,23 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+
 var MarkdownIt = require('markdown-it');
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
+  paper: {
+    width: 50,
+    height: 50,
+  }
+});
 
 export class RawText extends React.Component {
   render() {
@@ -20,14 +37,19 @@ export class RawText extends React.Component {
 
 /*Markup text*/
 /* to do set limit on characters per new line*/
-export class Markup extends React.Component {
+export class MarkupInner extends React.Component {
   createMarkup() {
     var md = new MarkdownIt()
     return {__html: md.render(this.props.value)};
   }
   render() {
     return (   
-      <div dangerouslySetInnerHTML={this.createMarkup()} />
+      <Paper elevation={2}>
+        <div dangerouslySetInnerHTML={this.createMarkup()} />
+      </Paper>
       );
   }
 }
+
+export const Markup = withStyles(styles)(MarkupInner);
+

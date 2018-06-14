@@ -38,7 +38,11 @@ class ContentInner extends React.Component {
 						{/*tile and edit on the same line*/}
 						<div className='row'>
 							<h1 className='col-md-10'>{page.title}</h1>
-							<LoginDialog page={page}/>		
+							{/*the edit option*/}
+							<LoginDialog 
+								open={false} 
+								page={page}
+							/>		
 						</div>
 						<Markup value={page.value}/>
 					</div>
